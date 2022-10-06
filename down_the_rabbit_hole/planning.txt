@@ -1,0 +1,3 @@
+Q. How would you make the background animation appear endless??
+  - in what way can the background be made into a rotating circle, like alice?
+  - is there some other way to think about this?
