@@ -1,7 +1,3 @@
-Q. does an update to an animation's playback rate result in a 'resetting' / 'alteration' of the iterations option?
-
-=> seems the issue only appears when the playback goes from positive to negative.......
-  - should I just make new animations at that point then?
-  
-"The updatePlaybackRate() method of the Web Animations API's Animation Interface sets the speed of an animation after first synchronizing its playback position."
-  - I wonder what "synchronizing its playback position" entails......
+IDEAS
+  - have little blurbs come out if she's going too fast or too slow
+  - have the 'game' end at some point?

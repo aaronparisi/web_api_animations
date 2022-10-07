@@ -16,11 +16,11 @@ const sceneryKeyframes = [
 ]
 const sceneryBgOptions = {
   duration: 360000,
-  iterations: Infinity
+  iterations: 1000000
 }
 const sceneryFgOptions = {
-  duration: 5000,
-  iterations: Infinity
+  duration: 10000,
+  iterations: Infinity,
 }
 const aliceKeyframes = [
   {
@@ -43,55 +43,65 @@ const bg1Animation = $bg1.animate(
   sceneryKeyframes,
   sceneryBgOptions
 )
-bg1Animation.currentTime = bg1Animation.effect.getComputedTiming().duration / 2
+bg1Animation.startTime = -86400000
+bg1Animation.currentTime = 86400000 + (bg1Animation.effect.getComputedTiming().duration / 2)
 const bg2Animation = $bg2.animate(
   sceneryKeyframes,
   sceneryBgOptions
 )
+bg2Animation.startTime = -86400000
 const fg1Animation = $fg1.animate(
   sceneryKeyframes,
   sceneryFgOptions
 )
-fg1Animation.currentTime = fg1Animation.effect.getComputedTiming().duration / 2
+fg1Animation.currentTime = 86400000 + (fg1Animation.effect.getComputedTiming().duration / 2)
+fg1Animation.startTime = -86400000
 const fg2Animation = $fg2.animate(
   sceneryKeyframes,
   sceneryFgOptions
 )
+fg2Animation.startTime = -86400000
 const aliceAnimation = $alice.animate(
   aliceKeyframes,
   aliceOptions
 )
 
 // GAME FUNCTIONALITY
+// // VARS
 const sceneries = [fg1Animation, fg2Animation, bg1Animation, bg2Animation];
-sceneries.forEach(sc => {
-  sc.addEventListener('finish', () => {
-    console.log('animation "finished"')
-    sc.play()
-  })
-})
 
-var adjustSceneryPlayback = function() {
+// // functions
+const adjustSceneryPlayback = () => {
   if (aliceAnimation.playbackRate < .8) {
-    sceneries.forEach(function(anim) {
-      anim.updatePlaybackRate((2/aliceAnimation.playbackRate) * -1);
-      // anim.updatePlaybackRate(2/aliceAnimation.playbackRate);
+    sceneries.forEach(anim => {
+      anim.updatePlaybackRate((1.9/aliceAnimation.playbackRate) * -1);
     });
   } else if (aliceAnimation.playbackRate > 1.2) {
-    sceneries.forEach(function(anim) {
-      anim.updatePlaybackRate(2/aliceAnimation.playbackRate);
+    sceneries.forEach(anim => {
+      anim.updatePlaybackRate(aliceAnimation.playbackRate/1.2);
     });
   } else {
-    sceneries.forEach(function(anim) {
+    sceneries.forEach(anim => {
       anim.playbackRate = 0;
     });
   }
 }
-setInterval(() => {
-  if (aliceAnimation.playbackRate > .1) {
+const slowDown = () => {
+  if (aliceAnimation.playbackRate > .2) {
     aliceAnimation.updatePlaybackRate(aliceAnimation.playbackRate * .9)
     adjustSceneryPlayback()
-    // if (sceneries.some(sc => sc.playState === 'finished')) console.log(sceneries.map(sc => sc.id))
+    if (sceneries.some(sc => sc.playState === 'finished')) console.log('somebody is \'finished\'')
   }
-}, 1000);
+}
+const speedUp = () => {
+  if (aliceAnimation.playbackRate < 4) {
+    aliceAnimation.updatePlaybackRate(aliceAnimation.playbackRate * 1.1)
+    adjustSceneryPlayback()
+  }
+}
 
+// // listeners, timers, etc.
+setInterval(() => {
+  slowDown()
+}, 1000);
+document.addEventListener('click', speedUp)

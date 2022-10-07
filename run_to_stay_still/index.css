@@ -12,10 +12,18 @@ img {
   bottom: 0; left: 0;
 }
 
+#background1 {
+  bottom: -1%;
+}
+
 #foreground1, #foreground2 { z-index: 1 ;}
 
 #foreground2, #background2 {
   transform: translateX(100%);
+}
+
+#foreground1 {
+  /* left: -50%; */
 }
 
 #palm3 {
@@ -56,7 +64,7 @@ img {
 
 #red-queen_and_alice {
   position: absolute;
-  top: 0; left: 50%;
+  top: 10%; left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
   width: 80%;

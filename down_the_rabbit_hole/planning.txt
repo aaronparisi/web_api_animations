@@ -1,3 +1,17 @@
 Q. How would you make the background animation appear endless??
   - in what way can the background be made into a rotating circle, like alice?
   - is there some other way to think about this?
+
+---
+
+https://javascript.tutorialink.com/how-to-reverse-an-infinate-animation-in-web-animation-api/
+
+"
+The behavior of reverse(), like play(), is that if the animation is at the “end”, it jumps back to the start and begins playing.
+
+For reverse() this means that if the current time is zero when you call it (as in your example), then it should jump back to the beginning. However, if your animation has an infinite length, that would mean jumping to infinity!
+"
+
+so maybe I could have like 1_000_000 iterations and then if we ever get close to the end I can...
+  - end the game?
+  - add more by creating a new animation?
