@@ -1,66 +1,54 @@
 // DOM
 const $ball = document.getElementById('ball')
+const $ballOffsetSlider = document.getElementById('ball-offset')
 const $floor = document.getElementById('floor')
+const $floorAngleSlider = document.getElementById('floor-angle')
 const ballStyle = getComputedStyle($ball)
 const floorStyle = getComputedStyle($floor)
 const viewWidth = document.documentElement.clientWidth
-let numRotations = viewWidth / (2 * Math.PI * parseFloat(ballStyle.height))
-let prevPlaybackRate = 1
-let floorTransformAngle
+let floorAngle,
+  ballOffset
 
 // HELPERS
-const calcFloorAngle = () => {
+const getFloorTransformVals = () => {
   let floorTransform = floorStyle.getPropertyValue('transform')
-  let floorTransformVals = floorTransform.split('(')[1].split(')')[0].split(',');
-  let floorTransformAngle = Math.round(Math.atan2(floorTransformVals[1],floorTransformVals[0]) * (180/Math.PI))
+  return floorTransform.split('(')[1].split(')')[0].split(',');
+}
+const calcFloorAngle = () => {
+  let floorTransformVals = getFloorTransformVals()
+  let floorAngle = Math.round(Math.atan2(floorTransformVals[1],floorTransformVals[0]) * (180/Math.PI))
 
-  return floorTransformAngle
+  return floorAngle
+}
+const calcBallOffsets = () => {
+  let floorAngleRadians = (Math.PI * floorAngle) / 180
+  let newBallOffsetX = Math.cos(floorAngleRadians) * ballOffset
+  let newBallOffsetY = Math.sin(floorAngleRadians) * ballOffset
+
+  return [newBallOffsetX, newBallOffsetY]
+}
+const adjustBall = () => {
+  ballOffset = $ballOffsetSlider.value
+
+  let ballOffsets = calcBallOffsets()
+  $ball.style.setProperty('--ball-angle', `${floorAngle}deg`)
+  $ball.style.setProperty('--ball-dx', `${ballOffsets[0]}px`)
+  $ball.style.setProperty('--ball-dy', `${ballOffsets[1]}px`)
 }
 const onFloorTilt = () => {
-  floorTransformAngle = calcFloorAngle()  // in case it's changed
-  
-  // figure out ball offsets now
+  floorAngle = Number($floorAngleSlider.value)
+  $floor.style.setProperty('--floor-angle', `${floorAngle}deg`)
 
-  // redo ball animations
+  adjustBall()
+}
+const onBallOffset = () => {
+  adjustBall()
 }
 
 // SETUP
+onBallOffset()
 onFloorTilt()
 
-// KEYFRAMES
-const ballKeyframes = [
-  {
-    transform: `translateX(100vw) rotate(${numRotations*360}deg)`
-  },
-  {
-    transform: `translateX(-100vw) rotate(-${numRotations*360}deg)`
-  }
-]
-const ballOptions = {
-  duration: 15000,
-  iterations: Infinity,
-  playbackRate: prevPlaybackRate
-}
-
-// ANIMATIONS
-// const ballAnim = $ball.animate(
-//   ballKeyframes,
-//   ballOptions
-// )
-// $ball.addEventListener('click', () => {
-//   console.log(`current playback: ${ballAnim.playbackRate}`)
-//   console.log(`prev playback: ${prevPlaybackRate}`)
-//   if (ballAnim.playbackRate === 0) {
-//     ballAnim.updatePlaybackRate(prevPlaybackRate)
-//     prevPlaybackRate = 0
-//   } else {
-//     prevPlaybackRate = ballAnim.playbackRate
-//     ballAnim.updatePlaybackRate(0)
-//   }
-// })
-// $floor.addEventListener('click', () => {
-//   if (ballAnim.playbackRate === 0) return
-  
-//   ballAnim.updatePlaybackRate(ballAnim.playbackRate * -1)
-//   prevPlaybackRate = ballAnim.playbackRate
-// })
+// LISTENERS
+$ballOffsetSlider.addEventListener('input', onBallOffset)
+$floorAngleSlider.addEventListener('input', onFloorTilt)

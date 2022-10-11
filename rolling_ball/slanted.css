@@ -9,30 +9,40 @@ html, body {
 }
 
 #floor {
+  --floor-angle: 0deg;
   width: 200%;
-  height: 50%;
+  height: 10px;
 
   position: absolute;
-  top: 0;
+  bottom: 50vh;
   left: -50vw;
 
   border-bottom: 1px solid black;
 
-  transform: rotate(15deg);
+  transform: rotate(var(--floor-angle));
   transform-origin: bottom center;
+
+  z-index: 1;
 }
 
 #ball {
-  height: 100px;
-  width: 100px;
+  --ball-radius: 50px;
+  --ball-dx: 0px;
+  --ball-dy: 0px;
+  --ball-angle: 0deg;
+
+  height: calc(var(--ball-radius) * 2);
+  width: calc(var(--ball-radius) * 2);
 
   position: absolute;
   bottom: 50%;
-  left: 50%;
+  left: calc(50% - var(--ball-radius) + var(--ball-dx));
 
   background: rgb(2,0,36);
   background: linear-gradient(160deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
   border-radius: 50px;
 
-  z-index: 2;
+  transform: translateY(var(--ball-dy)) rotate(var(--ball-angle));
+  transform-origin: bottom center;
 }
+
