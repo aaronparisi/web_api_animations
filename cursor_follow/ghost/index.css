@@ -1,0 +1,14 @@
+body {
+  position: relative;
+}
+
+#ghost {
+  --ghost-translate-x: 0px;
+  --ghost-translate-y: 0px;
+
+  position: fixed;
+  left: 0px;
+  top: 0px;
+
+  transform: translateX(var(--ghost-translate-x)) translateY(var(--ghost-translate-y));
+}

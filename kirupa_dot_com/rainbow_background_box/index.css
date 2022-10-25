@@ -1,0 +1,77 @@
+html, body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#color-box {
+  --bg-translate: -50%;
+  position: relative;
+  height: 200px;
+  width: 600px;
+
+  overflow: hidden;
+  background: transparent;
+}
+
+#color-box::before {
+  content: "";
+  z-index: -1;
+  width: 200%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(255, 154, 0, 1) 5%,
+    rgba(208, 222, 33, 1) 10%,
+    rgba(79, 220, 74, 1) 15%,
+    rgba(63, 218, 216, 1) 20%,
+    rgba(47, 201, 226, 1) 25%,
+    rgba(28, 127, 238, 1) 30%,
+    rgba(95, 21, 242, 1) 35%,
+    rgba(186, 12, 248, 1) 40%,
+    rgba(251, 7, 217, 1) 45%,
+    rgba(255, 0, 0, 1) 50%,
+    rgba(255, 154, 0, 1) 55%,
+    rgba(208, 222, 33, 1) 60%,
+    rgba(79, 220, 74, 1) 65%,
+    rgba(63, 218, 216, 1) 70%,
+    rgba(47, 201, 226, 1) 75%,
+    rgba(28, 127, 238, 1) 80%,
+    rgba(95, 21, 242, 1) 85%,
+    rgba(186, 12, 248, 1) 90%,
+    rgba(251, 7, 217, 1) 95%,
+    rgba(255, 0, 0, 1) 100%
+  );
+
+  transform: translateX(var(--bg-translate));
+  transition: transform 1s ease-in-out
+}
+
+.band {
+  background: transparent;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  border-right: 1px solid black;
+}
+
+#small-band {
+  width: 200px;
+  z-index: 4;
+}
+
+#medium-band {
+  width: 400px;
+  z-index: 3;
+}
+
+#large-band {
+  width: 600px;
+  z-index: 2;
+}

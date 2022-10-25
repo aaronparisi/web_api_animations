@@ -4,8 +4,17 @@ html, body {
 
   position: relative;
 
-  background: darkgray;
+  background: #595959;
   overflow: hidden;
+}
+
+#center {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  height: 3px;
+  width: 3px;
+  background-color: red;
 }
 
 #floor {
@@ -18,6 +27,8 @@ html, body {
   left: -50vw;
 
   border-bottom: 1px solid black;
+  border-left: 1px solid lime;
+  border-right: 1px solid lime;
 
   transform: rotate(var(--floor-angle));
   transform-origin: bottom center;
@@ -30,19 +41,20 @@ html, body {
   --ball-dx: 0px;
   --ball-dy: 0px;
   --ball-angle: 0deg;
+  --ball-transform-origin: bottom center;
 
   height: calc(var(--ball-radius) * 2);
   width: calc(var(--ball-radius) * 2);
 
   position: absolute;
   bottom: 50%;
-  left: calc(50% - var(--ball-radius) + var(--ball-dx));
+  left: calc(50% - var(--ball-radius));
 
   background: rgb(2,0,36);
   background: linear-gradient(160deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
   border-radius: 50px;
 
-  transform: translateY(var(--ball-dy)) rotate(var(--ball-angle));
-  transform-origin: bottom center;
+  transform: translateX(var(--ball-dx)) translateY(var(--ball-dy)) rotate(var(--ball-angle));
+  transform-origin: var(--ball-transform-origin);
 }
 

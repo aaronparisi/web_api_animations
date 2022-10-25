@@ -1,0 +1,9 @@
+#box {
+  --box-hue-rotate: 0deg;
+  height: 300px;
+  width: 700px;
+  background-color: #ff5500;
+
+  filter: hue-rotate(var(--box-hue-rotate));
+  transition: filter 1s linear;
+}

@@ -1,0 +1,41 @@
+body {
+  padding: 50px;
+  background-color: #EEE;
+}
+
+#container {
+  padding: 20px;
+  width: 100%;
+  height: 250px;
+  background-color: #EEE;
+  text-align: center;
+
+  animation: 2s infinite bounce;
+  /* animation: swivel 2s linear infinite; */
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translateY(500px);
+    animation-timing-function: ease-out;
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes swivel {
+  from {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}

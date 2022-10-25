@@ -1,2 +1,9 @@
-TODOS
-  - dx slider
+BALL ANIMATION BUTTON
+  - determine whether ball goes left, right, doesn't move, or straight down
+  - num rotations
+  - ball speed?
+  - from = current location
+  - to = ????
+  - what happens after it 'finishes'?
+    - is there a way to get it to 'go to the other side' and continue rolling?
+    - I wonder if I just need 3 keyframes........

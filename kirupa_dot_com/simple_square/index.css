@@ -1,0 +1,75 @@
+html, body {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+/* animating using transition */
+/* #square { */
+/*   --squareTX: 0px; */
+/*   --squareScaleX: 1; */
+/*   --squareScaleY: 1; */
+
+/*   height: 10px; */
+/*   width: 10px; */
+/*   background-color: blue; */
+  
+/*   position: absolute; */
+/*   left: 10vw; */
+/*   bottom: 50vh; */
+
+/*   transform: translateX(var(--squareTX)) scaleX(var(--squareScaleX)) scaleY(var(--squareScaleY)); */
+/*   transition: transform 2s steps(5); */
+/* } */
+
+/* animating using keyframes */
+#square {
+  position: absolute;
+
+  animation-name: moveAround;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes moveAround {
+  from {
+    background-color: blue;
+    height: 10px;
+    width: 10px;
+    left: 10vw;
+    bottom: 50vh;
+    transform: rotateZ(0deg);
+  }
+  10% {
+    background-color: #00FF84;
+    height: 20px;
+    width: 4px;
+    left: 45vw;
+    bottom: 90vh;
+    transform: rotateZ(45deg);
+  }
+  30% {
+    background-color: #FF005B;
+    height: 100px;
+    width: 100px;
+    left: 20vw;
+    bottom: 75vh;
+    transform: rotateZ(-45deg);
+  }
+  60% {
+    background-color: #9190F0;
+    height: 50px;
+    width: 120px;
+    left: 90vw;
+    bottom: 10vh;
+    transform: rotateZ(-45deg);
+  }
+  to {
+    background-color: blue;
+    height: 10px;
+    width: 10px;
+    left: 10vw;
+    bottom: 50vh;
+    transform: rotateZ(-360deg);
+  }
+}

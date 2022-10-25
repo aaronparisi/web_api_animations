@@ -1,0 +1,60 @@
+html, body {
+  height: 100vh;
+  width: 100vw;
+
+  position: relative;
+
+  background: #595959;
+  overflow: hidden;
+}
+
+#center {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  height: 3px;
+  width: 3px;
+  background-color: red;
+}
+
+#floor {
+  --floor-angle: 0deg;
+  width: 200%;
+  height: 10px;
+
+  position: absolute;
+  bottom: 50vh;
+  left: -50vw;
+
+  border-bottom: 1px solid black;
+  border-left: 1px solid lime;
+  border-right: 1px solid lime;
+
+  transform: rotate(var(--floor-angle));
+  transform-origin: bottom center;
+
+  z-index: 1;
+}
+
+#ball {
+  --ball-radius: 50px;
+  --ball-dx: 0px;
+  --ball-dy: 0px;
+  --ball-angle: 0deg;
+  --ball-transform-origin: bottom center;
+
+  height: calc(var(--ball-radius) * 2);
+  width: calc(var(--ball-radius) * 2);
+
+  position: absolute;
+  bottom: 50%;
+  left: calc(50% - var(--ball-radius) + var(--ball-dx));
+
+  background: rgb(2,0,36);
+  background: linear-gradient(160deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  border-radius: 50px;
+
+  transform: translateY(var(--ball-dy)) rotate(var(--ball-angle));
+  /* transform-origin: var(--ball-transform-origin); */
+}
+
